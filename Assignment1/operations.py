@@ -22,7 +22,7 @@ def determinant(matrix: list[list[float]]) -> float:
 
     # iterate each element of the first line and moake n sub-matrixes 
     # with the size n-1 and calculate the determinant
-    # apply LaPlace theorem !!
+    # apply LaPlace expansion !!
     return sum(list(map(lambda i: (-1)**i * matrix[0][i] * determinant(minor(matrix,0,i)),range(len(matrix)))))
 
 
@@ -88,11 +88,11 @@ def adjoint(matrix: list[list[float]]) -> list[list[float]]:
 
 
 def solve(matrix: list[list[float]], vector: list[float]) -> list[float]:
-    determinant = determinant(matrix)
-    if determinant == 0:
+    det = determinant(matrix)
+    if det == 0:
         raise ValueError("The determinant for the imput matrix is zero")
     
-    value = 1/determinant
+    value = 1/det
     inverse_A = [ [value * el for el in row] for row in adjoint(cofactor(matrix))]
 
     return multiply(inverse_A,vector)
