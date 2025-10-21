@@ -1,13 +1,11 @@
 import pickle
-import os
 import pandas as pd
 import numpy as np
 
-np.random.seed(42)
 
-learning_rate = 0.4
-num_batches = 256
-epochs = 200
+learning_rate = 0.1
+num_batches = int(60_000 // 32)
+epochs = 50
 
 
 def softmax(z: np.ndarray) -> np.ndarray:
@@ -96,7 +94,7 @@ for epoch in range(epochs):
 
     for batch_data, batch_labels in zip(image_batches, label_batches):
         delta, beta = training(batch_data, batch_labels, weights, bias)
-        # Update conform formulei din assignment: W = W + μ × gradient
+        # Update conform formulei din pdf
         weights += learning_rate * delta
         bias += learning_rate * beta
 
