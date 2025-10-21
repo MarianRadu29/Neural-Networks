@@ -45,13 +45,13 @@ def transpose(matrix: list[list[float]]) -> list[list[float]]:
 # dot product === inner product
 def dot_product(vector1: list[float],vector2: list[float])->float:
     if len(vector1) != len(vector1):
-        ValueError("The size of matrix isn't satisfiable for the vector given as parameter")
+        raise ValueError("The size of matrix isn't satisfiable for the vector given as parameter")
     return sum([a*b for (a,b) in zip(vector1,vector2)])
 
 
 def multiply(matrix: list[list[float]], vector: list[float]) -> list[float]:
     if len(matrix) != len(vector):
-        ValueError("The size of matrix isn't satisfiable for the vector given as parameter")
+        raise ValueError("The size of matrix isn't satisfiable for the vector given as parameter")
     return [dot_product(row,vector) for row in matrix]
 
 

@@ -12,8 +12,8 @@ def load_system(path: pathlib.Path) -> tuple[list[list[float]], list[float]]:
     a = [[0,0,0] for _ in range(3)]
 
     # getting 3X1 matrix(list) `b` from the right side of equations
-    b = [int(y) for x in content.split("\n") for y in x.split("=")[1].strip()]
-
+    b = [int(line.split('=')[1].strip()) for line in content.splitlines()]
+    print(b)
     for (index,line) in enumerate(content.split("\n")):
         line = line.split("=")[0]
         terms = line.split(" ")
@@ -24,6 +24,8 @@ def load_system(path: pathlib.Path) -> tuple[list[list[float]], list[float]]:
         if x is not None:
             if x == "x":
                 x = "1x"
+            if x == "-x":
+                x = "-1x"
             a[index][0] = int(str(x).replace("x",""))
 
         idx, y = next(((i, elem) for i, elem in enumerate(operands) if "y" in elem), (None, None))
