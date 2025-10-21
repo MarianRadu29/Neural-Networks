@@ -11,7 +11,10 @@ epochs = 200
 
 
 def softmax(z: np.ndarray) -> np.ndarray:
-    z = z - z.max(axis=1, keepdims=True)
+    """
+    z: (batch_size, 10)
+    """
+    z = z - z.max(axis=1, keepdims=True) # avoiding overflow for large values
     exp_z = np.exp(z)
     return exp_z / (exp_z.sum(axis=1, keepdims=True) )
 
@@ -39,7 +42,6 @@ def training(batch_data, batch_labels, weights, bias):
     # Compute gradients 
     delta = (batch_data.T @ d) / batch_size  # (784,batch_size)*(batch_size, 10) = (784, 10)
     beta = np.sum(d, axis=0) / batch_size # (10,)
-
 
     return delta , beta 
 
@@ -114,3 +116,5 @@ df = pd.DataFrame({
     "target": predictions
 })
 df.to_csv("submission.csv", index=False)
+
+
